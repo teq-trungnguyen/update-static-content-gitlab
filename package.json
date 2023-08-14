@@ -1,0 +1,44 @@
+{
+  "name": "my-strapi-plugin",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A Strapi application",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "lint": "eslint --ignore-path .eslintignore --ext .js, . --resolve-plugins-relative-to .",
+    "format": "prettier --ignore-path .eslintignore --write .",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "esprima": "^4.0.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0",
+    "prettier": "^3.0.1"
+  },
+  "dependencies": {
+    "@strapi/plugin-i18n": "4.12.4",
+    "@strapi/plugin-users-permissions": "4.12.4",
+    "@strapi/strapi": "4.12.4",
+    "mysql": "2.18.1"
+  },
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "strapi": {
+    "uuid": "eca5531e-20ad-44ac-b64e-43ce2adedf4d"
+  },
+  "engines": {
+    "node": ">=16.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
