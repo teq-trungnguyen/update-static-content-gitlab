@@ -26,6 +26,8 @@
     "prettier": "^3.0.1"
   },
   "dependencies": {
+    "@strapi/design-system": "^1.9.0",
+    "@strapi/helper-plugin": "^4.12.4",
     "@strapi/plugin-i18n": "4.12.4",
     "@strapi/plugin-users-permissions": "4.12.4",
     "@strapi/strapi": "4.12.4",
