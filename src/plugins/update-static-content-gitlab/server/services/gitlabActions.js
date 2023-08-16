@@ -7,16 +7,16 @@ async function history() {
   const config = buildPluginConfig(strapi);
   try {
     console.log(config);
-    // const res = await axios.get(
-    //   `https://api.github.com/repos/${config.owner}/${config.repo}/actions/workflows/${config.workflowId}/runs?per_page=20&page=1&branch=${config.branch}`,
-    //   {
-    //     headers: {
-    //       Accept: "application/vnd.github+json",
-    //       Authorization: `token ${config.githubToken}`,
-    //     },
-    //   },
-    // );
-    // return res;
+    const res = await axios.get(
+      `https://git.teqnological.asia/api/v4/projects/${config.projectId}/pipelines`,
+      {
+        headers: {
+          "PRIVATE-TOKEN": config.gitlabToken,
+        },
+      },
+    );
+    console.log("listHistory: ", res);
+    return res;
   } catch (err) {
     console.log(err);
   }

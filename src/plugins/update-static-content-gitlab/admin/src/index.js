@@ -3,6 +3,7 @@ import pluginPkg from "../../package.json";
 import pluginId from "../../utils/pluginId";
 import Initializer from "./components/Initializer";
 import PluginIcon from "./components/PluginIcon";
+import pluginPermissions from "./permissions";
 
 const name = pluginPkg.strapi.name;
 
@@ -30,6 +31,33 @@ export default {
         // },
       ],
     });
+    const pluginPrefix = `${pluginId}.settings`;
+    app.createSettingSection(
+      {
+        id: pluginPrefix,
+        intlLabel: {
+          id: `${pluginPrefix}.title`,
+          defaultMessage: name,
+        },
+      },
+      [
+        {
+          id: pluginPrefix,
+          intlLabel: {
+            id: `${pluginPrefix}.subtitle.link`,
+            defaultMessage: "Configuration",
+          },
+          to: `/settings/${pluginId}`,
+          Component: async () => {
+            const component = await import(
+              /* webpackChunkName: "update-static-content-setting-[request]" */ "./pages/App"
+            );
+            return component;
+          },
+          permissions: pluginPermissions.settings,
+        },
+      ],
+    );
     app.registerPlugin({
       id: pluginId,
       initializer: Initializer,

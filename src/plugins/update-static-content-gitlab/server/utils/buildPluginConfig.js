@@ -4,17 +4,21 @@ const protectedValue = require("./protectedValue");
 const getPluginConfig = require("./getPluginConfig");
 
 function buildPluginConfig(strapi, isValueProtected = false) {
-  //const getPluginConfigByKey = getPluginConfig(strapi);
-
-  // return {
-  //   githubToken: isValueProtected
-  //     ? protectedValue(getPluginConfigByKey("githubToken")?.trim())
-  //     : getPluginConfigByKey("githubToken")?.trim(),
-  //   owner: getPluginConfigByKey("owner")?.trim(),
-  //   repo: getPluginConfigByKey("repo")?.trim(),
-  //   workflowId: getPluginConfigByKey("workflowId"),
-  //   branch: getPluginConfigByKey("branch")?.trim(),
-  // };
+  const getPluginConfigByKey = getPluginConfig(strapi);
+  console.log("getPluginConfigByKey: ", getPluginConfigByKey);
+  return {
+    githubToken: isValueProtected
+      ? protectedValue(getPluginConfigByKey("githubToken")?.trim())
+      : getPluginConfigByKey("githubToken")?.trim(),
+    owner: getPluginConfigByKey("owner")?.trim(),
+    repo: getPluginConfigByKey("repo")?.trim(),
+    workflowId: getPluginConfigByKey("workflowId"),
+    branch: getPluginConfigByKey("branch")?.trim(),
+    gitlabToken: isValueProtected
+      ? protectedValue(getPluginConfigByKey("gitlabToken")?.trim())
+      : getPluginConfigByKey("gitlabToken")?.trim(),
+    projectId: getPluginConfigByKey("projectId")?.trim(),
+  };
   return {};
 }
 

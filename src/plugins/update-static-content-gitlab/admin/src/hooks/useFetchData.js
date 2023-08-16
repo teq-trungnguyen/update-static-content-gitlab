@@ -7,7 +7,7 @@ export default function useFetchData({ url, method }) {
   const [isLoading, setIsLoading] = useState(true);
   const [refetch, setRefetch] = useState({});
 
-  useEffect(async () => {
+  const callApi = async () => {
     setIsLoading(true);
     try {
       const response = await axios(url, { method });
@@ -21,6 +21,9 @@ export default function useFetchData({ url, method }) {
     } finally {
       setIsLoading(false);
     }
+  };
+  useEffect(() => {
+    callApi();
   }, [setIsLoading, setFetchedData, setErrors, refetch]);
 
   return { fetchedData, isLoading, errors, setRefetch };
