@@ -1,7 +1,9 @@
-'use strict';
+"use strict";
 
-const myController = require('./my-controller');
+const config = require("./config");
+const gitlabActions = require("./gitlabActions");
 
 module.exports = {
-  myController,
+  config,
+  gitlabActions,
 };

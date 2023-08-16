@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const myService = require('./my-service');
+const gitlabActions = require("./gitlabActions");
 
 module.exports = {
-  myService,
+  gitlabActions,
 };
