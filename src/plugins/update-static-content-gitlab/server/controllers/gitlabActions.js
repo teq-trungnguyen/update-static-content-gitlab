@@ -19,7 +19,7 @@ module.exports = {
     ) {
       return ctx.unprocessableEntity("Unprocessable Entity");
     }
-    ctx.body = response.data;
+    ctx.body = response?.data;
   },
   log: async (ctx) => {
     const { jobId } = ctx.request.query;

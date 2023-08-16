@@ -16,7 +16,7 @@ export default function useFetchData({ url, method }) {
       console.log(err);
       setErrors({
         message: err.response.data.error.message,
-        type: err.response.data.error.details.type,
+        type: err.response.data.error?.details?.type,
       });
     } finally {
       setIsLoading(false);

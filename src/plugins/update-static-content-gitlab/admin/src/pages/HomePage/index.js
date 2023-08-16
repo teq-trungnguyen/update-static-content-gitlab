@@ -46,7 +46,7 @@ const HomePage = () => {
   const [toastToggle, setToastToggle] = useState(false);
 
   const { errors, fetchedData, isLoading, setRefetch } = useFetchData({
-    url: `/${pluginId}/github-actions-history`,
+    url: `/${pluginId}/gitlab-actions-history`,
     method: "GET",
   });
 
@@ -82,10 +82,10 @@ const HomePage = () => {
   const BACK_BUTTON = useFormattedLabel("button.back");
 
   // Callbacks
-  async function triggerGithubActions() {
+  async function triggerGitlabActions() {
     try {
       setLoadingTriggerButton(true);
-      await axios(`/${pluginId}/github-actions-trigger`, {
+      await axios(`/${pluginId}/gitlab-actions-trigger`, {
         method: "POST",
       });
       setToastMsg({
@@ -147,8 +147,9 @@ const HomePage = () => {
   }
 
   const isAccessDenied =
-    errors.message === "ACCESS_DENIED" &&
-    errors.type === "ROLES_AND_PERMISSIONS";
+    errors?.message === "ACCESS_DENIED" &&
+    errors?.type === "ROLES_AND_PERMISSIONS";
+  console.log(fetchedData);
   return (
     <>
       <PageWrapper
@@ -164,7 +165,7 @@ const HomePage = () => {
             }
             primaryAction={
               <Button
-                onClick={triggerGithubActions}
+                onClick={triggerGitlabActions}
                 variant="default"
                 size="L"
                 disabled={isAccessDenied ? true : false}
@@ -196,38 +197,29 @@ const HomePage = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {fetchedData?.workflow_runs?.map(
-                ({
-                  id,
-                  conclusion,
-                  name,
-                  run_number,
-                  run_started_at,
-                  html_url,
-                  updated_at,
-                  disabled,
-                  created_at,
-                }) => {
-                  return (
-                    <CustomRow
-                      toastMsg={toastMsg}
-                      setToastMsg={setToastMsg}
-                      toastToggle={toastToggle}
-                      setToastToggle={setToastToggle}
-                      key={id}
-                      id={id}
-                      conclusion={conclusion}
-                      name={name}
-                      run_number={run_number}
-                      run_started_at={run_started_at}
-                      html_url={html_url}
-                      updated_at={updated_at}
-                      disabled={disabled}
-                      created_at={created_at}
-                    />
-                  );
-                },
-              )}
+              {fetchedData.length &&
+                fetchedData.map(
+                  (
+                    { id, status, ref, run_started_at, updated_at, created_at },
+                    index,
+                  ) => {
+                    return (
+                      <CustomRow
+                        toastMsg={toastMsg}
+                        setToastMsg={setToastMsg}
+                        toastToggle={toastToggle}
+                        setToastToggle={setToastToggle}
+                        key={id}
+                        id={id}
+                        status={status}
+                        name={ref}
+                        run_number={index + 1}
+                        updated_at={updated_at}
+                        created_at={created_at}
+                      />
+                    );
+                  },
+                )}
             </Tbody>
           </Table>
         </Guard>

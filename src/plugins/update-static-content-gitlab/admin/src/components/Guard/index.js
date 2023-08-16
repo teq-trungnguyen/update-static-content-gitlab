@@ -27,7 +27,7 @@ export default function Guard({ errors, children }) {
     const MISSING_CONFIG_BTN = useFormattedLabel("plugin.missingConfig.button");
     return (
       <EmptyStateLayout
-        content={`${MISSING_CONFIG}${errors.type}`}
+        content={`${MISSING_CONFIG}${errors?.type}`}
         icon={<EmptyPermissions width={ICON_SIZE} height={ICON_SIZE} />}
         action={
           <LinkButton
