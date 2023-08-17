@@ -24,7 +24,6 @@ export default function CustomRow({
     new Date(updated_at),
     new Date(created_at),
   );
-  console.log(name, msDiffResult);
   const mins = Math.floor(msDiffResult / 1000 / 60);
   const secs = (msDiffResult / 1000) % 60;
   const creationDate = formatRelative(new Date(created_at), new Date());
@@ -47,7 +46,6 @@ CustomRow.propTypes = {
   conclusion: PropTypes.string,
   name: PropTypes.string,
   run_number: PropTypes.number,
-  run_started_at: PropTypes.string,
   updated_at: PropTypes.string,
   created_at: PropTypes.string,
 };

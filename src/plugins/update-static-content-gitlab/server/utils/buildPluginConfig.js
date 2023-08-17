@@ -5,7 +5,6 @@ const getPluginConfig = require("./getPluginConfig");
 
 function buildPluginConfig(strapi, isValueProtected = false) {
   const getPluginConfigByKey = getPluginConfig(strapi);
-  console.log("getPluginConfigByKey: ", getPluginConfigByKey);
   return {
     gitlabToken: isValueProtected
       ? protectedValue(getPluginConfigByKey("gitlabToken")?.trim())

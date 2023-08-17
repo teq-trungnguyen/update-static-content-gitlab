@@ -1,5 +1,4 @@
 const pluginId = require("../../utils/pluginId");
-console.log(pluginId);
 module.exports = [
   {
     method: "GET",
@@ -38,23 +37,6 @@ module.exports = [
     method: "POST",
     path: "/gitlab-actions-trigger",
     handler: "gitlabActions.trigger",
-    config: {
-      policies: [
-        "admin::isAuthenticatedAdmin",
-        {
-          name: "admin::hasPermissions",
-          config: {
-            actions: [`plugin::${pluginId}.trigger`],
-          },
-        },
-        `plugin::${pluginId}.validatePluginConfig`,
-      ],
-    },
-  },
-  {
-    method: "GET",
-    path: "/gitlab-actions-jobs-log",
-    handler: "gitlabActions.log",
     config: {
       policies: [
         "admin::isAuthenticatedAdmin",

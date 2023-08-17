@@ -21,7 +21,6 @@ export default function Guard({ errors, children }) {
       />
     );
   }
-
   if (errors.message === "MISSING_CONFIG") {
     const MISSING_CONFIG = useFormattedLabel("plugin.missingConfig.message");
     const MISSING_CONFIG_BTN = useFormattedLabel("plugin.missingConfig.button");

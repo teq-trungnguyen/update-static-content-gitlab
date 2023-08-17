@@ -1,4 +1,5 @@
 const pluginId = require("../../utils/pluginId");
+const { NotFoundError, ForbiddenError } = require("@strapi/utils").errors;
 // TODO fix variable declarations
 module.exports = {
   history: async (ctx) => {
@@ -6,27 +7,33 @@ module.exports = {
       .plugin(pluginId)
       .service("gitlabActions")
       .history();
-    ctx.body = response.data;
+    if (response && response.data) {
+      return (ctx.body = response.data);
+    }
+    if (response.status === 404 && response.statusText == "Not Found") {
+      throw new NotFoundError("Not Found");
+    } else if (
+      response.status === 401 &&
+      response.statusText == "Unauthorized"
+    ) {
+      throw new ForbiddenError("Unauthorized");
+    }
   },
   trigger: async (ctx) => {
     const response = await strapi
       .plugin(pluginId)
       .service("gitlabActions")
       .trigger();
-    if (
-      response.status === 422 &&
-      response.statusText == "Unprocessable Entity"
-    ) {
-      return ctx.unprocessableEntity("Unprocessable Entity");
+    if (response && response.data) {
+      return (ctx.body = response.data);
     }
-    ctx.body = response?.data;
-  },
-  log: async (ctx) => {
-    const { jobId } = ctx.request.query;
-    const logURL = await strapi
-      .plugin(pluginId)
-      .service("gitlabActions")
-      .getLogs(jobId);
-    ctx.body = logURL;
+    if (response.status === 404 && response.statusText == "Not Found") {
+      throw new NotFoundError("Not Found");
+    } else if (
+      response.status === 401 &&
+      response.statusText == "Unauthorized"
+    ) {
+      throw new ForbiddenError("Unauthorized");
+    }
   },
 };

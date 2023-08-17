@@ -59,6 +59,13 @@ const HomePage = () => {
   const TOAST_SUCCESS_DESCRIPTION = useFormattedLabel(
     "plugin.toast.success.description",
   );
+
+  const TOAST_FAILURE_NOTFOUND_TITLE = useFormattedLabel(
+    "plugin.toast.failure.notfound.title",
+  );
+  const TOAST_FAILURE_NOTFOUND_DESCRIPTION = useFormattedLabel(
+    "plugin.toast.failure.notfound.description",
+  );
   const TOAST_FAILURE_UNKNOWN_TITLE = useFormattedLabel(
     "plugin.toast.failure.unknown.title",
   );
@@ -106,7 +113,7 @@ const HomePage = () => {
       });
       setToastToggle(true);
     } catch (error) {
-      console.error(error);
+      console.error("error: ", error.response);
       if (
         error.response.data.error?.status === 422 &&
         error.response.data.error?.name === "UnprocessableEntityError"
@@ -126,12 +133,21 @@ const HomePage = () => {
         });
       } else if (
         error.response.data.error?.status === 403 &&
-        error.response.data.error?.name === "PolicyError"
+        error.response.data.error?.name === "ForbiddenError"
       ) {
         setToastMsg({
           variant: "danger",
           title: TOAST_PERMISSION_DENIED_TITLE,
           message: TOAST_PERMISSION_DENIED_MSG,
+        });
+      } else if (
+        error.response.data.error?.status === 404 &&
+        error.response.data.error?.name === "NotFoundError"
+      ) {
+        setToastMsg({
+          variant: "danger",
+          title: TOAST_FAILURE_NOTFOUND_TITLE,
+          message: TOAST_FAILURE_NOTFOUND_DESCRIPTION,
         });
       } else {
         setToastMsg({
@@ -149,7 +165,6 @@ const HomePage = () => {
   const isAccessDenied =
     errors?.message === "ACCESS_DENIED" &&
     errors?.type === "ROLES_AND_PERMISSIONS";
-  console.log(fetchedData);
   return (
     <>
       <PageWrapper
@@ -197,12 +212,9 @@ const HomePage = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {fetchedData.length &&
+              {fetchedData.length > 0 &&
                 fetchedData.map(
-                  (
-                    { id, status, ref, run_started_at, updated_at, created_at },
-                    index,
-                  ) => {
+                  ({ id, status, ref, updated_at, created_at }, index) => {
                     return (
                       <CustomRow
                         toastMsg={toastMsg}

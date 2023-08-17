@@ -9,25 +9,23 @@
   "settings.headers.subtitle": "Here you can see your Update Static Content Configuration",
   "loadingMsg": "Loading....",
 
-  "settings.fields.githubtoken": "Github Personal Access Token",
-  "settings.fields.owner": "Github Owner Account",
-  "settings.fields.repo": "Github Repository",
-  "settings.fields.workflowid": "Workflow Id OR Filename",
+  "settings.fields.gitlaburlapi": "Gitlab Url",
   "settings.fields.branch": "Branch",
-  "settings.fields.roles": "Roles",
+  "settings.fields.projectid": "Project Id",
+  "settings.fields.gitlabtoken": "Gitlab Token",
+  "settings.fields.tagname": "Tag Name",
 
-  "settings.fields.hint.githubtoken": "Enter your `Github Personal Access Token` if you do not have create one from here",
-  "settings.fields.hint.owner": "Enter your `Github Username (owner of the account)`",
-  "settings.fields.hint.repo": "Enter your `Github Repository`",
-  "settings.fields.hint.workflowid": "Enter your `workflowId` or `filename`",
+  "settings.fields.hint.gitlaburlapi": "Enter your `Gitlab Url`",
   "settings.fields.hint.branch": "Enter the desired `branch`",
-  "settings.fields.hint.roles": "Roles that have access to the plugin",
+  "settings.fields.hint.projectid": "Enter your `Gitlab Project Id`",
+  "settings.fields.hint.gitlabtoken": "Enter your `Gitlab Project Access Token` if you do not have create one from here",
+  "settings.fields.hint.tagname": "Enter your `Name Of Deploy Tag`",
 
-  "settings.fields.placeholder.githubtoken": "Set `githubToken` in plugin config",
-  "settings.fields.placeholder.owner": "Set `owner` in plugin config",
-  "settings.fields.placeholder.repo": "Set `repo` in plugin config",
-  "settings.fields.placeholder.workflowid": "Set `workflowId` in plugin config",
+  "settings.fields.placeholder.gitlaburlapi": "Set `gitlabUrlApi` in plugin config",
   "settings.fields.placeholder.branch": "Set `branch` in plugin config",
+  "settings.fields.placeholder.projectid": "Set `projectId` in plugin config",
+  "settings.fields.placeholder.gitlabtoken": "Set `gitlabToken` in plugin config",
+  "settings.fields.placeholder.tagname": "Set `tagName` in plugin config",
 
   "plugin.title": "Update Static Content Page",
   "plugin.headers.title": "Update Static Content",
@@ -42,6 +40,9 @@
 
   "plugin.toast.failure.unknown.title": "Unknown Error",
   "plugin.toast.failure.unknown.description": "Something goes wrong try later",
+
+  "plugin.toast.failure.notfound.title": "Not Found Error",
+  "plugin.toast.failure.notfound.description": "Invalid gitlab url",
 
   "plugin.toast.failure.unprocessableEntity.title": "Event Error",
   "plugin.toast.failure.unprocessableEntity.description": "Your workflow_dispatch event is disabled.",
